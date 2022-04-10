@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { CartItemType } from '../types/types';
+import { CartItemType } from '../types/CartItemType';
 import { ItemWrapper } from './CartItem.style';
 
 type Props = {

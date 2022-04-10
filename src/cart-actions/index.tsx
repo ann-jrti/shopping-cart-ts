@@ -1,5 +1,7 @@
-import { CartItemType } from '../types/types';
+import { CartItemType } from '../types/CartItemType';
 
-export const getTotalItems = () => null;
+export const getTotalItems = (items: CartItemType[]) =>
+  items.reduce((acc: number, item) => acc + item.amount, 0);
+
 export const handleAddToCart = (clickedItem: CartItemType) => null;
 export const handleRemove = () => null;
