@@ -1,4 +1,4 @@
-import { ItemGrid } from './ItemsGrid/ItemsGrid';
+import { ItemGrid } from './components/ItemsGrid/ItemsGrid';
 
 const App = () => {
   return <ItemGrid></ItemGrid>;
