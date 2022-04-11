@@ -1,7 +1,13 @@
 import { ItemGrid } from './components/ItemsGrid/ItemsGrid';
+import Header from './components/Header/Header';
 
 const App = () => {
-  return <ItemGrid></ItemGrid>;
+  return (
+    <>
+      <Header></Header>
+      <ItemGrid></ItemGrid>
+    </>
+  );
 };
 
 export default App;

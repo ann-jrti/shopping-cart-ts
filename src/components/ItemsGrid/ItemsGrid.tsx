@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Wrapper, StyledButton } from '../../App.styles';
-import { Grid, LinearProgress, Drawer, Badge } from '@mui/material';
+import { Grid, LinearProgress, Drawer, Box, Badge } from '@mui/material';
 import { Item } from '../Item/Item';
 import { useQuery } from 'react-query';
 import { getProducts } from '../../api-requests/getProducts/getProducts';
 import { CartItemType } from '../../types/CartItemType';
-import { getTotalItems, handleRemoveFromCart } from '../../cart-actions';
+import { getTotalItems } from '../../cart-actions';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Cart from '../Cart/Cart';
 
@@ -29,6 +29,19 @@ export const ItemGrid = () => {
     });
   };
 
+  const handleRemoveFromCart = (id: number) => {
+    setCartItems((prev) =>
+      prev.reduce((acc, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return acc;
+          return [...acc, { ...item, amount: item.amount - 1 }];
+        } else {
+          return [...acc, item];
+        }
+      }, [] as CartItemType[])
+    );
+  };
+
   const { data, isLoading, error } = useQuery<CartItemType[]>(
     'products',
     getProducts
@@ -46,11 +59,13 @@ export const ItemGrid = () => {
           removeFromCart={handleRemoveFromCart}
         />
       </Drawer>
-      <StyledButton onClick={() => setCartOpen(true)}>
-        <Badge badgeContent={getTotalItems(cartItems)} color="error">
-          <AddShoppingCartIcon />
-        </Badge>
-      </StyledButton>
+      <Box display="flex" justifyContent="flex-end">
+        <StyledButton onClick={() => setCartOpen(true)}>
+          <Badge badgeContent={getTotalItems(cartItems)} color="error">
+            <AddShoppingCartIcon />
+          </Badge>
+        </StyledButton>
+      </Box>
 
       <Grid container spacing={3}>
         {data?.map((item) => (

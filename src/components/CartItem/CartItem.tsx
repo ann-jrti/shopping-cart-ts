@@ -27,7 +27,7 @@ const CartItem: React.FC<Props> = ({ item, addToCart, removeFromCart }) => (
         >
           -
         </Button>
-        <p>{item.amount}</p>
+        <p>amount: {item.amount}</p>
 
         <Button
           size="small"
