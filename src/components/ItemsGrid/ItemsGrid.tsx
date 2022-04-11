@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Wrapper, StyledButton } from '../../App.styles';
-import { Grid, LinearProgress, Drawer, Box, Badge } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  LinearProgress,
+  Drawer,
+  Box,
+  Badge,
+} from '@mui/material';
 import { Item } from '../Item/Item';
 import { useQuery } from 'react-query';
 import { getProducts } from '../../api-requests/getProducts/getProducts';
@@ -47,7 +54,15 @@ export const ItemGrid = () => {
     getProducts
   );
 
-  if (isLoading) return <LinearProgress />;
+  if (isLoading)
+    return (
+      <>
+        <LinearProgress />
+        <Box display="flex" justifyContent="center" mt={3}>
+          <Typography variant="h6">Loading content...</Typography>
+        </Box>
+      </>
+    );
   if (error) return <div>Something went wrong</div>;
 
   return (
